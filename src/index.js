@@ -49,10 +49,9 @@ const pizzaData = [
 function App() {
   return (
     <div>
-      <h1>Hello React</h1>
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Header />
+      <Menu />
+      <Footer />
     </div>
   );
 }
@@ -62,6 +61,42 @@ function Pizza() {
       <img src="pizzas/spinaci.jpg" alt="Pizza Spinaci" />
       <h2>Pizza Spinaci</h2>
       <p>Tomato, mozarella, spinach, and ricotta cheese</p>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <div className="Header">
+      <h1>- FAST REACT PIZZA CO. -</h1>
+      <h2>OUR MENU</h2>
+      <p>
+        Authentic Italian cuisine. 6 creative dishes to choose from. All from
+        our stone oven, all organic, all delicious.
+      </p>
+    </div>
+  );
+}
+
+function Menu() {
+  return (
+    <div className="Menu">
+      <h2>Our Menu</h2>
+      <Pizza />
+      <Pizza />
+      <Pizza />
+      <Pizza />
+    </div>
+  );
+}
+
+function Footer() {
+  const date = new Date();
+  const showTime = date.getHours() + ":" + date.getMinutes();
+  return (
+    <div className="Footer">
+      <p>We're open until {showTime}. Come visit us or order online.</p>
+      <button>Order Now</button>
     </div>
   );
 }
