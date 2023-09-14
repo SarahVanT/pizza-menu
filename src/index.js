@@ -91,11 +91,24 @@ function Menu() {
 }
 
 function Footer() {
-  const date = new Date();
-  const showTime = date.getHours() + ":" + date.getMinutes();
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
+
+  // if (hour >= openHour && closeHour <= closeHour) {
+  //   alert("We're currently open!");
+  // } else {
+  //   alert("Sorry, we are closed!");
+  // }
+
   return (
     <div className="Footer">
-      <p>We're open until {showTime}. Come visit us or order online.</p>
+      <p>
+        We're open until {new Date().toLocaleTimeString()}. Come visit us or
+        order online.
+      </p>
       <button>Order Now</button>
     </div>
   );
