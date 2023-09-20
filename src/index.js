@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+// array with objects
 const pizzaData = [
   {
     name: "Focaccia",
@@ -58,33 +59,34 @@ function App() {
 }
 
 function Header() {
-  // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
   return (
     <header className="header">
       <h1>Fast React Pizza Co.</h1>
-      <h2>OUR MENU</h2>
-      <p>
-        Authentic Italian cuisine. 6 creative dishes to choose from. All from
-        our stone oven, all organic, all delicious.
-      </p>
     </header>
   );
 }
 
 function Menu() {
   const pizzas = pizzaData;
-  // const pizzas = [];
   const numPizzas = pizzas.length;
   return (
     <main className="menu">
       <h2>Our Menu</h2>
+
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {/* Looping through array */}
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObject={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        // React fragment, able to add paragraph
+        <React.Fragment>
+          <p>
+            Authentic Italian cuisine. {numPizzas} creative dishes to choose
+            from. All from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {/* Looping through array */}
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObject={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </React.Fragment>
       ) : (
         <p>We're still working on our menu, please come back later</p>
       )}
@@ -94,14 +96,15 @@ function Menu() {
 
 function Pizza({ pizzaObject }) {
   // if soldOut is true, then the pizza wil not be listed
-  if (pizzaObject.soldOut) return null;
+  // if (pizzaObject.soldOut) return null;
   return (
-    <li className="pizza">
+    <li className={`pizza ${pizzaObject.soldOut ? "sold-out" : ""}`}>
       <img src={pizzaObject.photoName} alt={pizzaObject.name} />
       <div>
         <h3>{pizzaObject.name}</h3>
         <p>{pizzaObject.ingredients}</p>
-        <span>{pizzaObject.price + 3}</span>
+        {/* If the soldOut property is true, then display SOLD OUT */}
+        <span>{pizzaObject.soldOut ? "SOLD OUT" : pizzaObject.price + 3}</span>
       </div>
     </li>
   );
@@ -114,18 +117,6 @@ function Footer() {
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
 
-  // if (hour >= openHour && closeHour <= closeHour) {
-  //   alert("We're currently open!");
-  // } else {
-  //   alert("Sorry, we are closed!");
-  // }
-
-  // if (!isOpen)
-  //   return (
-  //     <p>
-  //       We're happy to welcome you between {openHour}:00 and {closeHour}:00
-  //     </p>
-  //   );
   return (
     <footer className="Footer">
       {isOpen ? (
